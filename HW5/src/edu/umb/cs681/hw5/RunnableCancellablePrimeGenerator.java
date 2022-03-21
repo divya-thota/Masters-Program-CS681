@@ -13,7 +13,7 @@ public class RunnableCancellablePrimeGenerator extends RunnablePrimeGenerator {
     public void setDone(){
         lock.lock();
         try {
-            done = false;
+            done = true;
         } finally {
             lock.unlock();
         }
