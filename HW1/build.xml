@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="HW1">
+	<property environment="env" />
+	<property name="junit.output.dir" value="junit" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="1.8" />
+	<property name="source" value="1.8" />
+	<path id="classpath">
+		<pathelement location="bin" />
+		<!-- <pathelement location="test/bin" /> -->
+		<!-- <fileset dir="${env.JUNIT}" includes ="*.jar" excludes ="org.junit.vintage.*.jar"/> -->
+	</path>
+
+	<target name="init">
+		<mkdir dir="bin" />
+		<!-- <mkdir dir="test/bin" /> -->
+	</target>
+	
+	<target name="clean">
+		<delete dir="bin" />
+		<!-- <delete dir="test/bin" /> -->
+	</target>
+	
+	<target depends="clean" name="cleanall" />
+	<target
+		depends="clean, build-project, Car"
+		name="build" />
+	<target depends="init" name="build-project">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<javac debug="true" debuglevel="${debuglevel}" destdir="bin"
+			includeantruntime="false" source="${source}" target="${target}">
+			<src path="src" />
+			<classpath refid="classpath" />
+		</javac>
+		<!-- <javac debug="true" debuglevel="${debuglevel}" -->
+			<!-- destdir="test/bin" includeantruntime="false" source="${source}" -->
+			<!-- target="${target}"> -->
+			<!-- <src path="test/src" /> -->
+			<!-- <classpath refid="classpath" /> -->
+		<!-- </javac> -->
+	</target>
+
+	<target name="Car">
+		<java classname="edu.umb.cs681.hw1.Car" classpath="bin"
+			failonerror="true" fork="yes" />
+	</target>
+
+</project>
