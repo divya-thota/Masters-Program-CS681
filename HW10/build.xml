@@ -1,48 +1,45 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project basedir="." default="build" name="HW10">
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="HW10" basedir="." default="run" >
 	<property environment="env" />
-	<property name="junit.output.dir" value="junit" />
-	<property name="debuglevel" value="source,lines,vars" />
-	<property name="target" value="1.8" />
-	<property name="source" value="1.8" />
+	
+	
+	<echo message="JUNIT: ${env.JUNIT}"/>
+	<echo message="ANT_HOME: ${env.ANT_HOME}"/>
+	
+	<property name="src" location="src" />
+		<property name="bin" location="bin" />
+		
 	<path id="classpath">
 		<pathelement location="bin" />
-		<!-- <pathelement location="test/bin" /> -->
-		<!-- <fileset dir="${env.JUNIT}" includes ="*.jar" excludes ="org.junit.vintage.*.jar"/> -->
+		
+		<fileset dir="${env.JUNIT}" includes=".jar" excludes="org.junit.vintage..jar" />
+		<fileset dir="${env.JUNIT}" includes="org.opentest4j*.jar"/>
+		<fileset dir="${env.JUNIT}" includes="org.apiguardian*.jar"/>
+		
 	</path>
-
-	<target name="init">
-		<mkdir dir="bin" />
-		<!-- <mkdir dir="test/bin" /> -->
-	</target>
-	
-	<target name="clean">
-		<delete dir="bin" />
-		<!-- <delete dir="test/bin" /> -->
-	</target>
-	
-	<target depends="clean" name="cleanall" />
-	<target
-		depends="clean, build-project, MultiThread"
-		name="build" />
-	<target depends="init" name="build-project">
-		<echo message="${ant.project.name}: ${ant.file}" />
-		<javac debug="true" debuglevel="${debuglevel}" destdir="bin"
-			includeantruntime="false" source="${source}" target="${target}">
-			<src path="src" />
-			<classpath refid="classpath" />
-		</javac>
-		<!-- <javac debug="true" debuglevel="${debuglevel}" -->
-			<!-- destdir="test/bin" includeantruntime="false" source="${source}" -->
-			<!-- target="${target}"> -->
-			<!-- <src path="test/src" /> -->
-			<!-- <classpath refid="classpath" /> -->
-		<!-- </javac> -->
-	</target>
-
-	<target name="MultiThread">
-		<java classname="edu.umb.cs681.hw10.MultiThread" classpath="bin"
-			failonerror="true" fork="yes" />
-	</target>
-
-</project>
+	<echo message="${toString:classpath}" />
+	   <target name="init">
+	      <mkdir dir="${bin}" />
+	    
+	   </target>
+	   <target name="compile" depends="init">
+	      <javac srcdir="${src}" destdir="${bin}" includeAntRuntime="no">
+	         <classpath refid="classpath" />
+	        
+	      </javac>
+	     
+	   </target>
+	   <target name="run" depends="compile">
+	   	<java classname="edu.umb.cs681.hw10.MultiThread">
+	   			<classpath refid="classpath"></classpath>
+	   		</java>
+	   
+	      
+	   </target>
+	   <target name="clean" depends="run">
+	      <delete includeemptydirs="true">
+	         <fileset dir="${bin}/edu/umb/cs681/hw10" includes="*/" />
+	        
+	      </delete>
+	   </target>
+	</project>
