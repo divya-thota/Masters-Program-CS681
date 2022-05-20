@@ -57,14 +57,6 @@ public class FileSystem implements Runnable {
         File f1 = new File(applications, "f1", 40, localTime);
         File f2 = new File(applications, "f2", 100, localTime);
 
-        Thread t1 = new Thread(fs);
-        t1.start();
-        try {
-            t1.join();
-        } catch (InterruptedException e3) {
-            e3.printStackTrace();
-        }
-        
         Directory home = new Directory(root, "home", 0, localTime);
         File f3 = new File(home, "f3", 200, localTime);
         File f4 = new File(home, "f4", 400, localTime);
@@ -73,10 +65,10 @@ public class FileSystem implements Runnable {
         File f5 = new File(code, "f5", 300, localTime);
         File f6 = new File(code, "f6", 600, localTime);
      
-        Thread t2 = new Thread(fs);
-        t2.start();
+        Thread t1 = new Thread(fs);
+        t1.start();
         try {
-            t2.join();
+            t1.join();
         } catch (InterruptedException e3) {
             e3.printStackTrace();
         }
