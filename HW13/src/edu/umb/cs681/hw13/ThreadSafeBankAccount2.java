@@ -29,28 +29,24 @@ public class ThreadSafeBankAccount2 {
         
     }
     public void deposit(double amount){
-
         lock.lock();
-            System.out.println(Thread.currentThread().getName() + "\t Current Balance is : " + balance);
-            // waiting for the balance to go below 300
-            while (balance >= 300) {
-            	try {
-            		System.out.println(Thread.currentThread().getName() + "\t Balance exceeded limit : Await Withdrawal");
-                    belowUpperLimitFundsCondition.await();
-            	}
-            	catch (InterruptedException e) {
-            		e.printStackTrace();
-            	}
-                
-            }
+        System.out.println(Thread.currentThread().getName() + "\t Current Balance is : " + balance);
+        // waiting for the balance to go below 300
+        while (balance >= 300) {
+        	try {
+        		System.out.println(Thread.currentThread().getName() + "\t Balance exceeded limit : Await Withdrawal");
+                belowUpperLimitFundsCondition.await();
+        	}
+        	catch (InterruptedException e) {
+        		e.printStackTrace();
+        	}
+        }
 
-            balance += amount;
-            System.out.println(Thread.currentThread().getName() + "\t Balance after deposit	: " + balance);
-            sufficientFundsCondition.signalAll();
-
-       lock.unlock();
+        balance += amount;
+        System.out.println(Thread.currentThread().getName() + "\t Balance after deposit	: " + balance);
+        sufficientFundsCondition.signalAll();
+        lock.unlock();
         
     }
-
 
 }
