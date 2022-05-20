@@ -25,6 +25,8 @@ public class MultiThread implements Runnable{
 	        Thread t10 = new Thread(withdraw);
 	        Thread t11 = new Thread(withdraw);
 	        Thread t12 = new Thread(withdraw);
+		Thread t13 = new Thread(withdraw);
+	        Thread t14 = new Thread(withdraw);
 
 	        t1.start();
 	        t2.start();
@@ -38,6 +40,8 @@ public class MultiThread implements Runnable{
 	        t10.start();
 	        t11.start();
 	        t12.start();
+		t13.start();
+	        t14.start();
 
 	        deposit.setDone();
 	        withdraw.setDone();
@@ -54,6 +58,8 @@ public class MultiThread implements Runnable{
 	        t10.interrupt();
 	        t11.interrupt();
 	        t12.interrupt();
+		t13.interrupt();
+	        t14.interrupt();
 
 	        try {
 	            t1.join();
