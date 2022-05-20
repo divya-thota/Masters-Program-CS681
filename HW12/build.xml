@@ -30,7 +30,7 @@
 	     
 	   </target>
 	   <target name="run" depends="compile">
-	   	<java classname="edu.umb.cs681.hw12.APFS">
+	   	<java classname="edu.umb.cs681.hw12.FileSystem">
 	   			<classpath refid="classpath"></classpath>
 	   		</java>
 	   
