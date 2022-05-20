@@ -30,7 +30,7 @@
 	     
 	   </target>
 	   <target name="run" depends="compile">
-	   	<java classname="edu.umb.cs681.hw17.StreamCSV">
+	   	<java classname="edu.umb.cs681.hw17.StreamsCSV">
 	   			<classpath refid="classpath"></classpath>
 	   		</java>
 	   
